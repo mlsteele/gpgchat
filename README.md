@@ -1,4 +1,4 @@
-Simple chat client that sends PGP encrypted messages.
+Simple chat service that sends PGP encrypted messages.
 
 To use this service you must have a GPG key set up.
 A good tutorial on GPG is available here: http://www.dewinter.com/gnupg_howto/english/GPGMiniHowto.html
@@ -15,11 +15,11 @@ First, create and edit your configuration file.
 
     $ cp config_example.py config.py
 
-To run the chat server run
+To start a chat server run
 
     $ python server.py
 
-To listen to messages
+To listen to messages run
 
     $ python ear.py
 

@@ -1,3 +1,8 @@
+"""
+server
+Message transport server.
+"""
+
 import re
 import zmq
 import config

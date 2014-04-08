@@ -1,4 +1,7 @@
-#!/usr/bin/env python
+"""
+gpgio
+Handle communication with the user through gpg
+"""
 
 import gnupg
 

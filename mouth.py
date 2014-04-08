@@ -1,3 +1,8 @@
+"""
+mouth
+Client for sending messages
+"""
+
 import zmq
 import gpgio
 import config

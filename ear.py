@@ -1,3 +1,8 @@
+"""
+ear
+Client for receiving messages
+"""
+
 import time
 import zmq
 import gpgio
