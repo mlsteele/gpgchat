@@ -11,6 +11,10 @@ Requires zeromq and python-gnupg
     $ sudo apt-get install libzmq-dev
     $ pip install python-gnupg pyzmq
 
+First, create and edit your configuration file.
+
+    $ cp config_example.py config.py
+
 To run the chat server run
 
     $ python server.py

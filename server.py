@@ -1,11 +1,13 @@
 import re
 import zmq
+import config
 
 class Server(object):
   def __init__(self):
     self.context = zmq.Context()
     self.sock = self.context.socket(zmq.REP)
-    self.sock.bind('tcp://*:8387')
+    self.sock.bind('tcp://*:{}'.format(config.SERVER_PORT))
+    print "Server listening on port {}".format(config.SERVER_PORT)
 
     self.messages = []
 
@@ -25,7 +27,7 @@ class Server(object):
 
   def _receive_message(self, msg):
     print "Message received."
-    print msg
+    print '\n'.join(["> " + line for line in msg.split('\n')])
     self.messages.append(msg)
 
   def _fetch_message(self, index):

@@ -1,6 +1,7 @@
 import time
 import zmq
 import gpgio
+import config
 
 DEBUG = False
 
@@ -8,7 +9,8 @@ class ListenClient(object):
   def __init__(self):
     self.context = zmq.Context()
     self.sock = self.context.socket(zmq.REQ)
-    self.sock.connect('tcp://localhost:8387')
+    dest = "tcp://{}:{}".format(config.SERVER_HOSTNAME, config.SERVER_PORT)
+    self.sock.connect(dest)
 
   def fetch_message(self, index):
     packet = "fetchmessage\n{}".format(index)

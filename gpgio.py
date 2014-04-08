@@ -15,7 +15,7 @@ def multiline_input(prompt=None):
   s = ""
   try:
     while True:
-      s += "\n" + raw_input()
+      s += "\n" + raw_input("> ")
   except EOFError:
     return s + "\n"
 
@@ -38,18 +38,14 @@ def find_local_key(query):
   else:
     raise RuntimeError("ambiguous query, many matches")
 
-
-DEFAULT_RECIPIENTS = ["Jess", "Anna", "Miles"]
-DEFAULT_SIGNER_FINGERPRINT = find_local_key("Miles")['fingerprint']
-
-def prompt_encrypt():
+def prompt_encrypt(prompt=None, recipients=[], sign=None):
   msg_prompt = "Enter your message ending in ^D on a newline:"
   msg_cleartext = multiline_input(msg_prompt)
-  crypt = gpg.encrypt(msg_cleartext, DEFAULT_RECIPIENTS, sign=DEFAULT_SIGNER_FINGERPRINT)
+  crypt = gpg.encrypt(msg_cleartext, recipients, sign=sign)
   if crypt:
     return str(crypt)
   else:
-    raise EncryptionError("Problem Encrypting")
+    raise EncryptionError("Error Encrypting ({})".format(crypt.status))
 
 def decrypt(msg):
   crypt = gpg.decrypt(msg)
@@ -59,4 +55,4 @@ def decrypt(msg):
     meta = '\n'.join(meta_lines)
     return "{}\n\n{}".format(str(crypt), meta)
   else:
-    raise DecryptionError("Problem Decrypting")
+    raise DecryptionError("Error Decrypting")
