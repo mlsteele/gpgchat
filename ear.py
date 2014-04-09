@@ -46,10 +46,9 @@ while True:
   time.sleep(1)
   new_messages = c.fetch_messages_since(last_message_index)
   for (index, message) in new_messages:
-    print "\n\n\n------ BEGIN MESSAGE {} ------".format(index)
     try:
       print gpgio.decrypt(message)
     except gpgio.DecryptionError:
       print "ERROR: Failed to decrypt message."
-    print "------ END MESSAGE   {} ------".format(index)
+    print "\n------------------------------\n\n"
     last_message_index = index
