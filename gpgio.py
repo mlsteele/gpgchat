@@ -55,7 +55,9 @@ def decrypt(msg):
   if crypt:
     meta_lines = crypt.stderr.split('\n')
     meta_lines = [line for line in meta_lines if "[GNUPG:]" not in line]
+    signature_line = "".join([line for line in meta_lines if "Good signature from" in line])
+    signature = signature_line.split("\"")[1]
     meta = '\n'.join(meta_lines)
-    return "{}\n\n{}".format(str(crypt), meta)
+    return "From: {}\n\n{}".format(signature, str(crypt))
   else:
     raise DecryptionError("Error Decrypting")
