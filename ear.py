@@ -3,6 +3,8 @@ ear
 Client for receiving messages
 """
 
+import os
+import subprocess
 import time
 import zmq
 import gpgio
@@ -49,6 +51,8 @@ while True:
     print "\n\n\n------ BEGIN MESSAGE {} ------".format(index)
     try:
       print gpgio.decrypt(message)
+      with open(os.devnull, 'w') as devnull:
+        subprocess.Popen(["mpg123", "blip.mp3"], stdout=devnull, stderr=devnull)
     except gpgio.DecryptionError:
       print "ERROR: Failed to decrypt message."
     print "------ END MESSAGE   {} ------".format(index)
